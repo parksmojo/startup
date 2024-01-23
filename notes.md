@@ -12,3 +12,7 @@
 ### Route 53
 - My domain is `parksonline.click`
 - `simon.parksonline.click` and other prefixes also route to my website
+
+### Caddy and Encryption
+- to exit VIM, press ESC and type ':wq'
+- Caddy kinda just takes care of everything
