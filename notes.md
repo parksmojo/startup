@@ -16,6 +16,7 @@
 ### Caddy and Encryption
 - to exit VIM, press ESC and type ':wq'
 - Caddy kinda just takes care of everything
+- Deploy using: `./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s <subdomain>`
 
 ### HTML
 - Used for the basic structure
