@@ -22,3 +22,8 @@
 - split into head, main, footer
 - link: `<a href="link.com">Display Text</a>`
 - image: `<img alt="Game Image" src="./images/game_description.png" style="width:300px;"/>`
+
+### CSS
+- Styles the page piece by piece
+- Reference classes by `.class`
+- `font-weight` changes bold
