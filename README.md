@@ -22,3 +22,11 @@ Have you ever played Rock Paper Scissors? Have you ever wished it was even coole
 - **Authentication** - The user will create an account and login to play. User information will be securely stored in a backend database
 - **Persistent data** - Used to store stats and scores, along with login information
 - **Web sockets** - Stats and scores will update in real time
+
+## HTML Deliverable:
+For this deliverable I built my webpage structure in HTML.
+- **Placeholder Application data:** - Buttons placed to play the game, alongside text readouts of each player's pick
+- **Placeholder Database data:** - Scoreboard showing the user's stats and the world stats
+- **WebSocket data:** - Sending and receiving the choices of each player in the game
+- I reorganized the pages a bit from the Description Deliverable, combining the account and scoreboard pages, and adding a separate login page
+- A self-designed diagram of the way the game works was added to help understanding the way the game plays
