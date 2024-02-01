@@ -16,3 +16,14 @@
 ### Caddy and Encryption
 - to exit VIM, press ESC and type ':wq'
 - Caddy kinda just takes care of everything
+
+### HTML
+- Used for the basic structure
+- split into head, main, footer
+- link: `<a href="link.com">Display Text</a>`
+- image: `<img alt="Game Image" src="./images/game_description.png" style="width:300px;"/>`
+
+### CSS
+- Styles the page piece by piece
+- Reference classes by `.class`
+- `font-weight` changes bold
