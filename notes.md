@@ -28,3 +28,4 @@
 - Styles the page piece by piece
 - Reference classes by `.class`
 - `font-weight` changes bold
+- `display: flex` allows spaced and adjustable aligning
