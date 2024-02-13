@@ -1,0 +1,22 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: rgb(87, 87, 87);    
+}
+
+main {    
+    background: rgb(150, 150, 150);
+}
+
+footer {
+    color: white;
+    background: rgb(87, 87, 87);
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
