@@ -28,5 +28,6 @@ For this deliverable I built my webpage structure in HTML.
 - **Placeholder Application data:** - Buttons placed to play the game, alongside text readouts of each player's pick
 - **Placeholder Database data:** - Scoreboard showing the user's stats and the world stats
 - **WebSocket data:** - Sending and receiving the choices of each player in the game
+- **3rd party service call:** - placeholder for a profanity check on the input username
 - I reorganized the pages a bit from the Description Deliverable, combining the account and scoreboard pages, and adding a separate login page
 - A self-designed diagram of the way the game works was added to help understanding the way the game plays
