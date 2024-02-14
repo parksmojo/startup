@@ -3,11 +3,11 @@ main .sides {
 }
 
 .sides div {
-    padding: 10px;
+    padding: 5px;
     justify-content: space-between;
 }
 
-.grid {
+.button-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
