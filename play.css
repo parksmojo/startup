@@ -4,4 +4,10 @@ main .sides {
 
 .sides div {
     padding: 10px;
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
