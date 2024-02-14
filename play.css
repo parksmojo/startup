@@ -1,0 +1,7 @@
+main .sides {
+    display: flex;
+}
+
+.sides div {
+    padding: 10px;
+}
