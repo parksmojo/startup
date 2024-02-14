@@ -2,6 +2,15 @@ main .sides {
     display: flex;
 }
 
+.sides button {
+    padding: 0px;
+    border: none;
+    color: none;
+}
+.sides button:hover {
+    opacity: 80%;
+}
+
 .sides div {
     padding: 5px;
     justify-content: space-between;
