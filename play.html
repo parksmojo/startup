@@ -5,6 +5,8 @@
         <!-- Tell browsers not to scale the viewport automatically -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>RPSG</title>
+
+        <link rel="stylesheet" href="main.css">
         
         <!-- Include bootstrap CSS framework -->
         <link
@@ -15,7 +17,7 @@
     </head>
     <body>
         <!-- Header Element: Title and Navigation -->
-        <header>
+        <header class="dark">
             <h1>Rock, Paper, Scissors ... Gun</h1>
             <nav>
                 <menu>
@@ -24,13 +26,12 @@
                     <li><a href="scores.html">Scoreboard</a></li>
                 </menu>
             </nav>
-            <p>Logged in as: User</p>
-            <hr />
+            <div>Logged in as: User</div>
         </header>
 
         
         <!-- Main Element: Interaction -->
-        <main>
+        <main class="light">
             <h1>Play</h1>
             <h2>Opponents choice: ...</h2>
             <h2>Your choice: ...</h2>
@@ -56,10 +57,8 @@
 
         
         <!-- Footer Element: Credits and Github -->
-        <footer>
-            <hr />
+        <footer class="dark">
             <span>Parker Shumard</span>
-            <br />
             <a href="https://github.com/parksmojo/startup">Github</a>
         </footer>
     </body>
