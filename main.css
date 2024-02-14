@@ -17,6 +17,17 @@ body a{
     color: rgb(231, 230, 230);
 }
 
+header {
+    padding-left: 10px;
+    display: flex;
+}
+
+header div {
+    align-self: center;
+    margin-left: auto;
+    padding-right: 10px;
+}
+
 menu {
     flex: 1;
     display: flex;
@@ -25,7 +36,11 @@ menu {
 }
 
 menu li{
-    padding: 0.3em;
+    padding: 0 0.3em;
+}
+
+menu a {
+    text-decoration: none;
 }
 
 main {
@@ -46,6 +61,11 @@ main {
 
 .centered {
     text-align: center;
+    justify-content: space-around;
+}
+
+.centered div{
+    padding-top: 50px;
 }
 
 footer {
