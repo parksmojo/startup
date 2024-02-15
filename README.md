@@ -25,9 +25,26 @@ Have you ever played Rock Paper Scissors? Have you ever wished it was even coole
 
 ## HTML Deliverable:
 For this deliverable I built my webpage structure in HTML.
-- **Placeholder Application data:** - Buttons placed to play the game, alongside text readouts of each player's pick
-- **Placeholder Database data:** - Scoreboard showing the user's stats and the world stats
+- **Placeholder Application data** - Buttons placed to play the game, alongside text readouts of each player's pick
+- **Placeholder Database data** - Scoreboard showing the user's stats and the world stats
 - **WebSocket data:** - Sending and receiving the choices of each player in the game
-- **3rd party service call:** - placeholder for a profanity check on the input username
+- **3rd party service call** - placeholder for a profanity check on the input username
 - I reorganized the pages a bit from the Description Deliverable, combining the account and scoreboard pages, and adding a separate login page
 - A self-designed diagram of the way the game works was added to help understanding the way the game plays
+
+## CSS Deliverable:
+For this deliverable I styled and adjusted my web page with CSS.
+- **Header, body, and footer** - All colored and justified. 
+- **Navigation elements** - The header includes navigation to the other pages of the website, including the display of the logged in user, which upon click takes the user to the login screen
+- **Responsive sizing** - The header and footer elements are fixed to the top and bottom of the page, while the center card adjusts according to the width of the window. The title also disappears if the window becomes too thin, allowing space for the menu and user.
+- **Application elements** - Consistent coloring and style between elements (e.g. the buttons) brings the design of the site together.
+- **Application text content** - The website has consistent fonts and text color.
+- **Application images** - Images were used and styled to be button labels
+
+
+
+
+
+
+
+
