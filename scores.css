@@ -1,0 +1,9 @@
+.long {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.first {
+    padding-bottom: 25px;
+}
