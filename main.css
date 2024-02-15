@@ -38,6 +38,8 @@ body a{
 header {
     padding-left: 10px;
     display: flex;
+    position: fixed;
+    width: 100%;
 }
 
 header div {
@@ -67,6 +69,8 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    margin-top: 50px; 
+    margin-bottom: 10px;
 }
 
 .popup {
@@ -89,6 +93,9 @@ main {
 footer {
     margin-top: auto;
     flex: 0 30px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 footer a {
