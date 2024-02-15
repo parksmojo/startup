@@ -96,6 +96,8 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 footer a {
