@@ -33,6 +33,13 @@ body {
 
 body a{
     color: rgb(231, 230, 230);
+    text-decoration: none;
+}
+body a:hover {
+    color: rgb(146, 146, 146);
+}
+nav .active {
+    text-decoration: underline;
 }
 
 header {
@@ -59,10 +66,6 @@ menu li{
     padding: 0 0.3em;
 }
 
-menu a {
-    text-decoration: none;
-}
-
 main {
     flex: 1;
     display: flex;
@@ -76,8 +79,9 @@ main {
 .popup {
     display: block;
     background: white;
-    max-width: 650px;
-    padding: 50px;
+    max-width: 130vh;
+    padding: 30px;
+    padding-top: 20px;
     margin: 20px;
 }
 
