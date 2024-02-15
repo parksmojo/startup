@@ -4,6 +4,24 @@ body {
     flex-direction: column;
 }
 
+.buttons {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size:17px;
+    padding-bottom: 4px;
+}
+.big-buttons {
+    border-radius: 8px;
+    font-size: 30px;
+    padding-bottom: 6px;
+}
+.buttons:hover {
+    opacity: 80%;
+}
+
 .dark {
     color: rgb(231, 230, 230);
     background: rgb(80, 80, 80);  
