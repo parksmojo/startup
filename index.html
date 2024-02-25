@@ -7,6 +7,7 @@
         <title>RPSG</title>
         <link rel="icon" href="./images/okhand.jpg" />
 
+        <script src="login.js"></script>
         <link rel="stylesheet" href="main.css">
 
         <!-- Include bootstrap CSS framework -->
@@ -27,11 +28,8 @@
         <main class="light">
             <div class="popup">
                 <h1>Login to play</h1>
-                <form method="get" action="home.html">
-                    <label for="name">Username: </label>
-                    <input type="text" id="name" placeholder="username" />
-                    <button class="buttons" type="submit">Login</button>
-                </form>  
+                <input type="text" id="name" placeholder="Your name here" />
+                <button class="buttons" type="submit" onclick="login()">Login</button>
                 <p>Will not accept profane usernames. Checked with PurgoMalum</p> <!-- https://www.purgomalum.com/ -->
             </div>
         </main>
