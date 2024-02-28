@@ -2,7 +2,7 @@ class ScoreKeep {
     myStats;
 
     constructor(){
-        this.myStats = { games: 5, wins: 3, losses: 2, guns: 6, rock: 2, paper: 3, scissors: 4 }
+        this.myStats = this.loadStats()
         this.display()
     }
     
@@ -25,6 +25,27 @@ class ScoreKeep {
         ]);
         return items.get(Math.max(...items.keys()))
     }
+
+    saveStats(stats){
+        if(stats){
+            localStorage.setItem("userStats", JSON.stringify(stats));
+        } else {
+            localStorage.setItem("userStats", JSON.stringify(this.myStats));
+        }
+    }
+
+    loadStats(){
+        const statsText = localStorage.getItem('userStats');
+        if (statsText) {
+            console.log("accessing localStorage");
+            return JSON.parse(statsText);
+        } else {
+            const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
+            this.saveStats(defaultStats)
+            return defaultStats;
+        }
+    }
+
 }
 
 const scoring = new ScoreKeep()
