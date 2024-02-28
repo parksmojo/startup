@@ -2,8 +2,8 @@ class ScoreKeep {
     myStats;
 
     constructor(){
-        this.myStats = this.loadStats()
-        this.display()
+        this.myStats = this.loadStats();
+        this.display();
     }
     
     display(){
@@ -17,6 +17,10 @@ class ScoreKeep {
     }
 
     findFavorite(){
+        if(this.myStats.games === 0){
+            return "None";
+        }
+
         const items = new Map([
             [this.myStats.guns, "Gun"],
             [this.myStats.rock, "Rock"],
@@ -26,18 +30,13 @@ class ScoreKeep {
         return items.get(Math.max(...items.keys()))
     }
 
-    saveStats(stats){
-        if(stats){
-            localStorage.setItem("userStats", JSON.stringify(stats));
-        } else {
-            localStorage.setItem("userStats", JSON.stringify(this.myStats));
-        }
+    saveStats(stats = this.myStats){
+        localStorage.setItem("userStats", JSON.stringify(stats));
     }
 
     loadStats(){
         const statsText = localStorage.getItem('userStats');
         if (statsText) {
-            console.log("accessing localStorage");
             return JSON.parse(statsText);
         } else {
             const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
@@ -48,4 +47,4 @@ class ScoreKeep {
 
 }
 
-const scoring = new ScoreKeep()
+const scoring = new ScoreKeep();
