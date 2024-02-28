@@ -1,3 +1,5 @@
+insertUsername()
+
 function login() {
     const nameEl = document.querySelector("#name");
     if(nameEl.value === ""){
@@ -9,3 +11,13 @@ function login() {
     }
   }
   
+function logout() {
+  localStorage.removeItem("userName");
+}
+
+function insertUsername(){
+  const userEl = document.getElementById("user");
+  if(userEl !== null){
+    userEl.textContent = localStorage.getItem('userName');
+  }
+}
