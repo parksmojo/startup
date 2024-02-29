@@ -35,10 +35,12 @@ class ScoreKeep {
     loadStatMap(){
         console.log("loading stat map");
         const statsText = localStorage.getItem('localStatMap');
-        if(statsText.length > 2){
-            console.log("found map")
-            const statsMap = new Map(Object.entries(JSON.parse(statsText)));
-            return statsMap;
+        if(statsText){
+            if(statsText.length > 2){
+                console.log("found map")
+                const statsMap = new Map(Object.entries(JSON.parse(statsText)));
+                return statsMap;
+            }
         } else {
             console.log("creating new map");
             const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
@@ -81,33 +83,35 @@ class ScoreKeep {
 }
 
 function loadScores() {
-    let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-        scores = JSON.parse(scoresText);
-    }
-
-    const tableBodyEl = document.querySelector('#scores');
-
-    if (scores.length) {
-        for (const [i, score] of scores.entries()) {
-        const positionTdEl = document.createElement('td');
-        const nameTdEl = document.createElement('td');
-        const scoreTdEl = document.createElement('td');
-
-        positionTdEl.textContent = i + 1;
-        nameTdEl.textContent = score.name;
-        scoreTdEl.textContent = score.score;
-
-        const rowEl = document.createElement('tr');
-        rowEl.appendChild(positionTdEl);
-        rowEl.appendChild(nameTdEl);
-        rowEl.appendChild(scoreTdEl);
-
-        tableBodyEl.appendChild(rowEl);
+    if(document.querySelector('#scores')){
+        let scores = [];
+        const scoresText = localStorage.getItem('scores');
+        if (scoresText) {
+            scores = JSON.parse(scoresText);
         }
-    } else {
-        tableBodyEl.innerHTML = '<tr><td colSpan=4>Scores Unavailable</td></tr>';
+
+        const tableBodyEl = document.querySelector('#scores');
+
+        if (scores.length) {
+            for (const [i, score] of scores.entries()) {
+            const positionTdEl = document.createElement('td');
+            const nameTdEl = document.createElement('td');
+            const scoreTdEl = document.createElement('td');
+
+            positionTdEl.textContent = i + 1;
+            nameTdEl.textContent = score.name;
+            scoreTdEl.textContent = score.score;
+
+            const rowEl = document.createElement('tr');
+            rowEl.appendChild(positionTdEl);
+            rowEl.appendChild(nameTdEl);
+            rowEl.appendChild(scoreTdEl);
+
+            tableBodyEl.appendChild(rowEl);
+            }
+        } else {
+            tableBodyEl.innerHTML = '<tr><td colSpan=4>Scores Unavailable</td></tr>';
+        }
     }
 }
 
