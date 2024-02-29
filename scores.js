@@ -80,17 +80,45 @@ class ScoreKeep {
     }
 }
 
-const scoring = new ScoreKeep();
+function loadScores() {
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+        scores = JSON.parse(scoresText);
+    }
 
-// function sendStats(wins,losses,guns,rock,paper,scissors){
-//     const currentUser = localStorage.getItem('currentUser') ?? 'User';
-//     let stat = scoring.getStat(currentUser);
-//     stat.games += wins + losses;
-//     stat.wins += wins;
-//     stat.losses += losses;
-//     stat.guns += guns;
-//     stat.rock += rock;
-//     stat.paper += paper;
-//     stat.scissors += scissors;
-//     scoring.setStat(currentUser,stat);
-// }
+    const tableBodyEl = document.querySelector('#scores');
+
+    if (scores.length) {
+        for (const [i, score] of scores.entries()) {
+        const positionTdEl = document.createElement('td');
+        const nameTdEl = document.createElement('td');
+        const scoreTdEl = document.createElement('td');
+
+        positionTdEl.textContent = i + 1;
+        nameTdEl.textContent = score.name;
+        scoreTdEl.textContent = score.score;
+
+        const rowEl = document.createElement('tr');
+        rowEl.appendChild(positionTdEl);
+        rowEl.appendChild(nameTdEl);
+        rowEl.appendChild(scoreTdEl);
+
+        tableBodyEl.appendChild(rowEl);
+        }
+    } else {
+        tableBodyEl.innerHTML = '<tr><td colSpan=4>Scores Unavailable</td></tr>';
+    }
+}
+
+function placeholderScores(){
+    const scores = [];
+    scores.push({ name: 'H3nry', score: 402 });
+    scores.push({ name: 'Sharon5', score: 320 });
+    scores.push({ name: 'Zack007', score: 309 });
+    localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+const scoring = new ScoreKeep();
+placeholderScores();
+loadScores();
