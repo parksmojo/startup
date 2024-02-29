@@ -1,13 +1,12 @@
 class ScoreKeep {
     constructor(){
         const currentUser = localStorage.getItem('currentUser') ?? 'User';
-        const currentUserStats = this.getStat(currentUser);
-        this.display(currentUserStats);
+        this.display(currentUser);
     }
 
     getStat(currentUser = "User"){
         console.log("getting stats for", currentUser);
-        const statMap = this.loadStats();
+        const statMap = this.loadStatMap();
         if(statMap.has(currentUser)){
             console.log(currentUser, "has stats");
             return statMap.get(currentUser);
@@ -19,7 +18,7 @@ class ScoreKeep {
         }
     }
 
-    loadStats(){
+    loadStatMap(){
         console.log("loading stat map");
         const statsText = localStorage.getItem('localStatMap');
         if(statsText.length > 2){
@@ -36,12 +35,13 @@ class ScoreKeep {
 
     setStat(currentUser = "User", currentUserStats){
         console.log("setting stats for", currentUser);
-        const statMap = this.loadStats();
+        const statMap = this.loadStatMap();
         statMap.set(currentUser,currentUserStats);
         localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(statMap)));
     }
 
-    display(stats){
+    display(user){
+        const stats = this.getStat(user);
         document.getElementById("games").textContent = stats.games;
         document.getElementById("wins").textContent = stats.wins;
         document.getElementById("losses").textContent = stats.losses;
