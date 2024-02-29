@@ -38,24 +38,25 @@
         <!-- Main Element: Interaction -->
         <main class="light">
             <div class="popup centered">
-                <h1>You vs John</h1>
+                <h1>You vs CPU</h1>
                 <h3>Round 1</h3>
                 <div class="sides">
                     <div class="left">
                         <h2>Your choice:</h2>
                         <div class="button-container">
-                            <div><button><img src="./images/rockhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img src="./images/paperhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="rock" src="./images/rockhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="paper" src="./images/paperhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="scissor" src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="gun" src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
                         </div>
                     </div>
                     <div class="middle centered">
-                        <!-- a count down timer -->
-                        <h1>3</h1>
+                        <h1>
+                            <span id="userScore">0</span>:<span id="opScore">0</span>
+                        </h1>
                     </div>
                     <div>
-                        <h2>John's<br>choice:</h2>
+                        <h2>CPU's<br>choice:</h2>
                         <div><img src="./images/blankhand.jpg" style="width:70px;"/></div>
                     </div>
                 </div>
