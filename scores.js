@@ -34,6 +34,13 @@ class ScoreKeep {
         }
     }
 
+    setStat(currentUser = "User", currentUserStats){
+        console.log("setting stats for", currentUser);
+        const statMap = this.loadStats();
+        statMap.set(currentUser,currentUserStats);
+        localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(statMap)));
+    }
+
     display(stats){
         document.getElementById("games").textContent = stats.games;
         document.getElementById("wins").textContent = stats.wins;
