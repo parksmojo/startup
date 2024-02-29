@@ -40,16 +40,16 @@
         <main class="light">
             <div class="popup centered">
                 <h1>You vs CPU</h1>
-                <h3>Round 1</h3>
+                <h3>Round <span id="roundNum">1</span></h3>
                 <h4 id="status"></h4>
                 <div class="sides">
                     <div class="left">
                         <h2>Your choice:</h2>
                         <div class="button-container">
-                            <div><button><img id="rock" onclick="game.pickRock()" src="./images/rockhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="paper" onclick="game.pickPaper()" src="./images/paperhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="scissor" onclick="game.pickScissors()" src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="gun" onclick="game.pickGun()" src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="rock" onclick="game.startRound(0)" src="./images/rockhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="paper" onclick="game.startRound(1)" src="./images/paperhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="scissor" onclick="game.startRound(2)" src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="gun" onclick="game.startRound(3)" src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
                         </div>
                     </div>
                     <div class="middle centered">
