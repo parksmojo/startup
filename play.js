@@ -10,6 +10,13 @@ class Game {
         this.cpu();
     }
 
+    resetMatch(winner){
+        this.userScore = 0;
+        this.cpuScore = 0;
+        this.roundNum = 1;
+        this.updateDisplay();
+    }
+
     resetRound(winner){
         console.log(winner, "Won!");
         if(winner === 'user'){
@@ -17,9 +24,12 @@ class Game {
         } else if(winner === 'cpu'){
             this.cpuScore = this.cpuScore + 1;
         }
+
         this.roundNum = this.roundNum + 1;
         this.updateDisplay()
         this.cpu();
+
+        if(this.userScore > 1 || this.cpuScore > 1){ this.resetMatch(winner); }
     }
 
     updateDisplay(){
