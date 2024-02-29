@@ -1,9 +1,11 @@
 class Game {
+    currentUser;
     userScore;
     cpuScore;
     roundNum;
 
     constructor(){
+        this.currentUser = localStorage.getItem('currentUser');
         this.userScore = 0;
         this.cpuScore = 0;
         this.roundNum = 0;
@@ -11,25 +13,34 @@ class Game {
     }
 
     resetMatch(winner){
+        if(winner === 'user'){
+            document.getElementById('status').innerText = this.currentUser + " won!";
+        } else if(winner === 'cpu'){
+            document.getElementById('status').innerText = "CPU won!";
+        }
         this.userScore = 0;
         this.cpuScore = 0;
         this.roundNum = 1;
-        this.updateDisplay();
     }
 
     resetRound(winner){
-        console.log(winner, "Won!");
+        let statusMessage = "None";
         if(winner === 'user'){
             this.userScore = this.userScore + 1;
+            statusMessage = this.currentUser + " got a point!";
         } else if(winner === 'cpu'){
             this.cpuScore = this.cpuScore + 1;
+            statusMessage = "CPU got a point!";
+        } else if(winner === 'tie'){
+            statusMessage = "Tie!";
         }
 
+        document.getElementById('status').innerText = statusMessage;
         this.roundNum = this.roundNum + 1;
-        this.updateDisplay()
         this.cpu();
 
         if(this.userScore > 1 || this.cpuScore > 1){ this.resetMatch(winner); }
+        this.updateDisplay();
     }
 
     updateDisplay(){
