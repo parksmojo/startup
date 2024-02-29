@@ -4,23 +4,45 @@ class Game {
     cpuScore;
     roundNum;
 
+    wins;
+    losses;
+    gun;
+    rock;
+    paper;
+    scissors;
+
     constructor(){
         this.currentUser = localStorage.getItem('currentUser');
         this.userScore = 0;
         this.cpuScore = 0;
         this.roundNum = 0;
+
+        this.resetStatCounters();
         this.cpu();
+    }
+
+    resetStatCounters(){
+        this.wins = 0;
+        this.losses = 0;
+        this.gun = 0;
+        this.rock = 0;
+        this.paper = 0;
+        this.scissors = 0;
     }
 
     resetMatch(winner){
         if(winner === 'user'){
+            this.wins += 1;
             document.getElementById('status').innerText = this.currentUser + " won!";
         } else if(winner === 'cpu'){
+            this.losses += 1;
             document.getElementById('status').innerText = "CPU won!";
         }
         this.userScore = 0;
         this.cpuScore = 0;
         this.roundNum = 1;
+        scoring.updateStats(this.wins,this.losses,this.gun,this.rock,this.paper,this.scissors);
+        this.resetStatCounters();
     }
 
     resetRound(winner){
@@ -72,6 +94,7 @@ class Game {
         if(userPick === cpuPick){ winner = 'tie'; }
         switch(userPick){
             case 0:
+                this.rock += 1;
                 switch(cpuPick){
                     case 1:
                         winner = 'cpu';
@@ -83,6 +106,7 @@ class Game {
                 }
                 break;
             case 1:
+                this.paper += 1;
                 switch(cpuPick){
                     case 0:
                         winner = 'user';
@@ -94,6 +118,7 @@ class Game {
                 }
                 break;
             case 2:
+                this.scissors += 1;
                 switch(cpuPick){
                     case 1:
                         winner = 'user';
@@ -105,6 +130,7 @@ class Game {
                 }
                 break;
             case 3:
+                this.gun += 1;
                 switch(cpuPick){
                     case 0:
                         winner = 'cpu';

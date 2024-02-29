@@ -4,6 +4,20 @@ class ScoreKeep {
         this.display(currentUser);
     }
 
+    updateStats(wins,losses,guns,rock,paper,scissors){
+        console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
+        const currentUser = localStorage.getItem('currentUser') ?? 'User';
+        let stat = this.getStat(currentUser);
+        stat.games += wins + losses;
+        stat.wins += wins;
+        stat.losses += losses;
+        stat.guns += guns;
+        stat.rock += rock;
+        stat.paper += paper;
+        stat.scissors += scissors;
+        this.setStat(currentUser,stat);
+    }
+
     getStat(currentUser = "User"){
         console.log("getting stats for", currentUser);
         const statMap = this.loadStatMap();
@@ -42,13 +56,13 @@ class ScoreKeep {
 
     display(user){
         const stats = this.getStat(user);
-        document.getElementById("games").textContent = stats.games;
-        document.getElementById("wins").textContent = stats.wins;
-        document.getElementById("losses").textContent = stats.losses;
-        document.getElementById("gun").textContent = stats.guns;
+        if(document.getElementById("games")){ document.getElementById("games").textContent = stats.games }
+        if(document.getElementById("wins")){ document.getElementById("wins").textContent = stats.wins }
+        if(document.getElementById("losses")){ document.getElementById("losses").textContent = stats.losses }
+        if(document.getElementById("gun")){ document.getElementById("gun").textContent = stats.guns }
 
         const favorite = this.findFavorite(stats);
-        document.getElementById("fav").textContent = favorite;
+        if(document.getElementById("fav")){ document.getElementById("fav").textContent = favorite }
     }
 
     findFavorite(stats){
@@ -67,3 +81,16 @@ class ScoreKeep {
 }
 
 const scoring = new ScoreKeep();
+
+// function sendStats(wins,losses,guns,rock,paper,scissors){
+//     const currentUser = localStorage.getItem('currentUser') ?? 'User';
+//     let stat = scoring.getStat(currentUser);
+//     stat.games += wins + losses;
+//     stat.wins += wins;
+//     stat.losses += losses;
+//     stat.guns += guns;
+//     stat.rock += rock;
+//     stat.paper += paper;
+//     stat.scissors += scissors;
+//     scoring.setStat(currentUser,stat);
+// }
