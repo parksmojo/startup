@@ -41,7 +41,13 @@ For this deliverable I styled and adjusted my web page with CSS.
 - **Application text content** - The website has consistent fonts and text color.
 - **Application images** - Images were used and styled to be button labels
 
-
+## Java Deliverable:
+For this deliverable I built the logic and functionality of my website
+- **Future login** - The name is stored in local storage and used to keep track of scores
+- **Future database data** - The javascript takes and displays data that will be taken from a database
+- **Future WebSocket** - The cpu makes desicions for the opponent, but in the future the server will receive the choices of another player
+- **Game Logic** - The game of Rock Paper Scissors Gun is completely playable
+- Minor Adjustments - The timer was replaced with a points display, and a status message was added
 
 
 
