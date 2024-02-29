@@ -8,6 +8,7 @@
         <link rel="icon" href="./images/okhand.jpg" />
 
         <script src="login.js"></script>
+        <script src="play.js"></script>
 
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="play.css">
@@ -40,14 +41,15 @@
             <div class="popup centered">
                 <h1>You vs CPU</h1>
                 <h3>Round 1</h3>
+                <h4 id="status"></h4>
                 <div class="sides">
                     <div class="left">
                         <h2>Your choice:</h2>
                         <div class="button-container">
-                            <div><button><img id="rock" src="./images/rockhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="paper" src="./images/paperhand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="scissor" src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
-                            <div><button><img id="gun" src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="rock" onclick="game.pickRock()" src="./images/rockhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="paper" onclick="game.pickPaper()" src="./images/paperhand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="scissor" onclick="game.pickScissors()" src="./images/scissorshand.jpg" style="width:70px;"/></button></div>
+                            <div><button><img id="gun" onclick="game.pickGun()" src="./images/pistolhand.jpg" style="width:70px;"/></button></div>
                         </div>
                     </div>
                     <div class="middle centered">
