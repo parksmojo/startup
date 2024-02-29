@@ -37,16 +37,32 @@ class Game {
 
         document.getElementById('status').innerText = statusMessage;
         this.roundNum = this.roundNum + 1;
-        this.cpu();
 
         if(this.userScore > 1 || this.cpuScore > 1){ this.resetMatch(winner); }
         this.updateDisplay();
+        this.cpu();
     }
 
     updateDisplay(){
         document.getElementById("roundNum").innerText = this.roundNum;
         document.getElementById("userScore").innerText = this.userScore;
         document.getElementById("opScore").innerText = this.cpuScore;
+        const cpuPick = parseInt(localStorage.getItem('cpuPick'));
+        const opHand = document.getElementById("opChoice");
+        switch(cpuPick){
+            case 0:
+                opHand.src="./images/rockhand.jpg";
+                break;
+            case 1:
+                opHand.src="./images/paperhand.jpg";
+                break;
+            case 2:
+                opHand.src="./images/scissorshand.jpg";
+                break;
+            case 3:
+                opHand.src="./images/pistolhand.jpg";
+                break;
+        }
     }
 
     startRound(userPick){
