@@ -80,74 +80,74 @@ class ScoreKeep {
         ]);
         return items.get(Math.max(...items.keys()))
     }
-}
 
-function loadScores() {
-    const currentUser = localStorage.getItem('currentUser') ?? 'User';
-    let stat = scoring.getStat(currentUser);
-    insertScore(currentUser, stat.wins);
-    if(document.querySelector('#scores')){
+    loadScores() {
+        const currentUser = localStorage.getItem('currentUser') ?? 'User';
+        let stat = scoring.getStat(currentUser);
+        this.insertScore(currentUser, stat.wins);
+        if(document.querySelector('#scores')){
+            let scores = [];
+            const scoresText = localStorage.getItem('scores');
+            if (scoresText) {
+                scores = JSON.parse(scoresText);
+            }
+    
+            const tableBodyEl = document.querySelector('#scores');
+    
+            if (scores.length) {
+                for (const [i, score] of scores.entries()) {
+                const positionTdEl = document.createElement('td');
+                const nameTdEl = document.createElement('td');
+                const scoreTdEl = document.createElement('td');
+    
+                positionTdEl.textContent = i + 1;
+                nameTdEl.textContent = score.name;
+                scoreTdEl.textContent = score.score;
+    
+                const rowEl = document.createElement('tr');
+                rowEl.appendChild(positionTdEl);
+                rowEl.appendChild(nameTdEl);
+                rowEl.appendChild(scoreTdEl);
+    
+                tableBodyEl.appendChild(rowEl);
+                }
+            } else {
+                tableBodyEl.innerHTML = '<tr><td colSpan=4>Scores Unavailable</td></tr>';
+            }
+        }
+    }
+    
+    insertScore(user, wins){
         let scores = [];
         const scoresText = localStorage.getItem('scores');
         if (scoresText) {
             scores = JSON.parse(scoresText);
         }
-
-        const tableBodyEl = document.querySelector('#scores');
-
-        if (scores.length) {
-            for (const [i, score] of scores.entries()) {
-            const positionTdEl = document.createElement('td');
-            const nameTdEl = document.createElement('td');
-            const scoreTdEl = document.createElement('td');
-
-            positionTdEl.textContent = i + 1;
-            nameTdEl.textContent = score.name;
-            scoreTdEl.textContent = score.score;
-
-            const rowEl = document.createElement('tr');
-            rowEl.appendChild(positionTdEl);
-            rowEl.appendChild(nameTdEl);
-            rowEl.appendChild(scoreTdEl);
-
-            tableBodyEl.appendChild(rowEl);
+        let found = false;
+        for(const obj of scores){
+            if(obj.name === user){
+                obj.score = wins;
+                found = true;
+                break;
             }
-        } else {
-            tableBodyEl.innerHTML = '<tr><td colSpan=4>Scores Unavailable</td></tr>';
         }
-    }
-}
-
-function insertScore(user, wins){
-    let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-        scores = JSON.parse(scoresText);
-    }
-    let found = false;
-    for(const obj of scores){
-        if(obj.name === user){
-            obj.score = wins;
-            found = true;
-            break;
+        if(!found){ 
+            console.log("Inserting a new score!");
+            scores.push({ name: user, score: wins});
         }
+    
+        scores.sort((a, b) => b.score - a.score);
+        localStorage.setItem('scores', JSON.stringify(scores));
     }
-    if(!found){ 
-        console.log("Inserting a new score!");
-        scores.push({ name: user, score: wins});
-    }
-
-    scores.sort((a, b) => b.score - a.score);
-    localStorage.setItem('scores', JSON.stringify(scores));
 }
 
 function placeholderScores(){
-    insertScore('H3nry', 40);
-    insertScore('Sharon5', 32);
-    insertScore('Zack007', 15);
-    insertScore('Brad?', 7);
+    scoring.insertScore('H3nry', 40);
+    scoring.insertScore('Sharon5', 32);
+    scoring.insertScore('Zack007', 15);
+    scoring.insertScore('Brad?', 7);
 }
 
 const scoring = new ScoreKeep();
 placeholderScores();
-loadScores();
+scoring.loadScores();
