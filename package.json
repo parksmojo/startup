@@ -1,0 +1,15 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "Click [here](/notes.md) to see my notes\r ## Description Deliverable:\r ### Elevator Pitch\r Have you ever played Rock Paper Scissors? Have you ever wished it was even cooler? Now you can play the classic game with an added twist, a gun! The gun is beaten by the rock, but beats both paper and scissors. Play against a cpu or even your friends, and see how you stack up against others!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
