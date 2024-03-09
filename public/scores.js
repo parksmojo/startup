@@ -83,6 +83,9 @@ class ScoreKeep {
 }
 
 function loadScores() {
+    const currentUser = localStorage.getItem('currentUser') ?? 'User';
+    let stat = scoring.getStat(currentUser);
+    insertScore(currentUser, stat.wins);
     if(document.querySelector('#scores')){
         let scores = [];
         const scoresText = localStorage.getItem('scores');
@@ -115,12 +118,32 @@ function loadScores() {
     }
 }
 
-function placeholderScores(){
-    const scores = [];
-    scores.push({ name: 'H3nry', score: 402 });
-    scores.push({ name: 'Sharon5', score: 320 });
-    scores.push({ name: 'Zack007', score: 309 });
+function insertScore(user, wins){
+    console.log("Inserting a new score!");
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+        scores = JSON.parse(scoresText);
+    }
+    let found = false;
+    for(const obj of scores){
+        if(obj.name === user){
+            obj.score = wins;
+            found = true;
+            break;
+        }
+    }
+    if(!found){
+        scores.push({ name: user, score: wins});
+    }
     localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+function placeholderScores(){
+    insertScore('H3nry', 40);
+    insertScore('Sharon5', 32);
+    insertScore('Zack007', 15);
+    insertScore('Brad?', 7);
 }
 
 const scoring = new ScoreKeep();
