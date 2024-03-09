@@ -119,7 +119,6 @@ function loadScores() {
 }
 
 function insertScore(user, wins){
-    console.log("Inserting a new score!");
     let scores = [];
     const scoresText = localStorage.getItem('scores');
     if (scoresText) {
@@ -133,9 +132,12 @@ function insertScore(user, wins){
             break;
         }
     }
-    if(!found){
+    if(!found){ 
+        console.log("Inserting a new score!");
         scores.push({ name: user, score: wins});
     }
+
+    scores.sort((a, b) => b.score - a.score);
     localStorage.setItem('scores', JSON.stringify(scores));
 }
 
