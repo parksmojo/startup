@@ -89,3 +89,6 @@
 | startsWith()  | True if the string has a given prefix                        |
 | endsWith()    | True if the string has a given suffix                        |
 | toLowerCase() | Converts all characters to lowercase                         |
+
+### Node.js and Express
+- middleware works between the static files and the web
