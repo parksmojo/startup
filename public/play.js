@@ -41,7 +41,7 @@ class Game {
         this.userScore = 0;
         this.cpuScore = 0;
         this.roundNum = 1;
-        scoring.updateStats(this.wins,this.losses,this.gun,this.rock,this.paper,this.scissors);
+        updateStats(this.wins,this.losses,this.gun,this.rock,this.paper,this.scissors);
         this.resetStatCounters();
     }
 
