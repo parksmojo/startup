@@ -1,3 +1,21 @@
+async function loadScores() {
+    const allscores = loadStatMap();
+    console.log(allscores);
+    try {
+        // const response = await fetch('/api/scores');
+        // allscores = await response.json();
+
+        // localStorage.setItem('localStatMap', JSON.stringify(allscores));
+    } catch {
+        console.log("couldn't get server stats")
+    }
+
+    console.log(allscores);
+    if(document.querySelector('#scores')){
+        display(allscores);
+    }
+}
+
 function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
@@ -13,15 +31,15 @@ function updateStats(wins,losses,guns,rock,paper,scissors){
 }
 
 function getStat(currentUser = "User"){
-    // console.log("getting stats for", currentUser);
+    console.log("getting stats for", currentUser);
     const statMap = loadStatMap();
     if(statMap.has(currentUser)){
-        // console.log(currentUser, "has stats");
+        console.log(currentUser, "has stats");
         return statMap.get(currentUser);
     } else {
-        // console.log(currentUser, "is a new user");
+        console.log(currentUser, "is a new user");
         const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
-        statMap.set(currentUser,defaultStats);
+        setStat(currentUser,defaultStats);
         return defaultStats;
     }
 }
@@ -36,17 +54,17 @@ function setStat(currentUser = "User", currentUserStats){
 }
 
 function loadStatMap(){
-    // console.log("loading stat map");
+    console.log("loading stat map");
+    const currentUser = localStorage.getItem('currentUser') ?? 'User';
     const statsText = localStorage.getItem('localStatMap');
     if(statsText){
         if(statsText.length > 2){
-            // console.log("found map")
+            console.log("found map")
             const statsMap = new Map(Object.entries(JSON.parse(statsText)));
             return statsMap;
         }
     } else {
-        // console.log("creating new map");
-        const currentUser = localStorage.getItem('currentUser') ?? 'User';
+        console.log("creating new map");
         const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
         const newStatsMap = new Map([[currentUser, defaultStats]]);
         localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(newStatsMap)));
@@ -68,11 +86,11 @@ function findFavorite(stats){
     return items.get(Math.max(...items.keys()))
 }
 
-const user = localStorage.getItem('currentUser') ?? 'User';
-const allscores = loadStatMap();
-const stats = allscores.get(user);
+function display(allscores){
+    const user = localStorage.getItem('currentUser') ?? 'User';
+    console.log(allscores);
+    const stats = getStat(user);
 
-if(document.querySelector('#scores')){
     if(document.getElementById("games")){ document.getElementById("games").textContent = stats.games }
     if(document.getElementById("wins")){ document.getElementById("wins").textContent = stats.wins }
     if(document.getElementById("losses")){ document.getElementById("losses").textContent = stats.losses }
@@ -99,3 +117,5 @@ if(document.querySelector('#scores')){
     i++;
     })
 }
+
+loadScores();
