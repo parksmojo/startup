@@ -5,7 +5,7 @@ class ScoreKeep {
     }
 
     updateStats(wins,losses,guns,rock,paper,scissors){
-        console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
+        // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
         const currentUser = localStorage.getItem('currentUser') ?? 'User';
         let stat = this.getStat(currentUser);
         stat.games += wins + losses;
@@ -19,13 +19,13 @@ class ScoreKeep {
     }
 
     getStat(currentUser = "User"){
-        console.log("getting stats for", currentUser);
+        // console.log("getting stats for", currentUser);
         const statMap = this.loadStatMap();
         if(statMap.has(currentUser)){
-            console.log(currentUser, "has stats");
+            // console.log(currentUser, "has stats");
             return statMap.get(currentUser);
         } else {
-            console.log(currentUser, "is a new user");
+            // console.log(currentUser, "is a new user");
             const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
             statMap.set(currentUser,defaultStats);
             return defaultStats;
@@ -33,16 +33,16 @@ class ScoreKeep {
     }
 
     loadStatMap(){
-        console.log("loading stat map");
+        // console.log("loading stat map");
         const statsText = localStorage.getItem('localStatMap');
         if(statsText){
             if(statsText.length > 2){
-                console.log("found map")
+                // console.log("found map")
                 const statsMap = new Map(Object.entries(JSON.parse(statsText)));
                 return statsMap;
             }
         } else {
-            console.log("creating new map");
+            // console.log("creating new map");
             const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
             const newStatsMap = new Map([[this.currentUser, defaultStats]]);
             return newStatsMap;
@@ -53,7 +53,8 @@ class ScoreKeep {
         console.log("setting stats for", currentUser);
         const statMap = this.loadStatMap();
         statMap.set(currentUser,currentUserStats);
-        localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(statMap)));
+        const sortedMap = new Map([...statMap.entries()].sort((a, b) => b[1].wins - a[1].wins));
+        localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(sortedMap)));
     }
 
     display(user){
@@ -65,6 +66,30 @@ class ScoreKeep {
 
         const favorite = this.findFavorite(stats);
         if(document.getElementById("fav")){ document.getElementById("fav").textContent = favorite }
+
+        const tableBodyEl = document.querySelector('#scores');
+        const allscores = this.loadStatMap();
+        let i = 1;
+        allscores.forEach(function(stats,name) {
+            const positionTdEl = document.createElement('td');
+            const nameTdEl = document.createElement('td');
+            const scoreTdEl = document.createElement('td');
+
+            positionTdEl.textContent = i;
+            nameTdEl.textContent = name;
+            scoreTdEl.textContent = stats.wins;
+
+            const rowEl = document.createElement('tr');
+            rowEl.appendChild(positionTdEl);
+            rowEl.appendChild(nameTdEl);
+            rowEl.appendChild(scoreTdEl);
+
+            if(tableBodyEl){
+                console.log("found #scores");
+                tableBodyEl.appendChild(rowEl);
+            }
+            i++;
+        })
     }
 
     findFavorite(stats){
@@ -141,13 +166,4 @@ class ScoreKeep {
     }
 }
 
-function placeholderScores(){
-    scoring.insertScore('H3nry', 40);
-    scoring.insertScore('Sharon5', 32);
-    scoring.insertScore('Zack007', 15);
-    scoring.insertScore('Brad?', 7);
-}
-
 const scoring = new ScoreKeep();
-placeholderScores();
-scoring.loadScores();
