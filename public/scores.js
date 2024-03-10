@@ -1,7 +1,7 @@
 function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
-    let stat = this.getStat(currentUser);
+    let stat = getStat(currentUser);
     stat.games += wins + losses;
     stat.wins += wins;
     stat.losses += losses;
@@ -9,12 +9,12 @@ function updateStats(wins,losses,guns,rock,paper,scissors){
     stat.rock += rock;
     stat.paper += paper;
     stat.scissors += scissors;
-    this.setStat(currentUser,stat);
+    setStat(currentUser,stat);
 }
 
 function getStat(currentUser = "User"){
     // console.log("getting stats for", currentUser);
-    const statMap = this.loadStatMap();
+    const statMap = loadStatMap();
     if(statMap.has(currentUser)){
         // console.log(currentUser, "has stats");
         return statMap.get(currentUser);
@@ -27,10 +27,11 @@ function getStat(currentUser = "User"){
 }
 
 function setStat(currentUser = "User", currentUserStats){
-    console.log("setting stats for", currentUser);
-    const statMap = this.loadStatMap();
+    // console.log("setting stats for", currentUser);
+    const statMap = loadStatMap();
     statMap.set(currentUser,currentUserStats);
     const sortedMap = new Map([...statMap.entries()].sort((a, b) => b[1].wins - a[1].wins));
+    // console.log(sortedMap);
     localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(sortedMap)));
 }
 
@@ -45,8 +46,10 @@ function loadStatMap(){
         }
     } else {
         // console.log("creating new map");
+        const currentUser = localStorage.getItem('currentUser') ?? 'User';
         const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
-        const newStatsMap = new Map([[this.currentUser, defaultStats]]);
+        const newStatsMap = new Map([[currentUser, defaultStats]]);
+        localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(newStatsMap)));
         return newStatsMap;
     }
 }
@@ -66,32 +69,33 @@ function findFavorite(stats){
 }
 
 const user = localStorage.getItem('currentUser') ?? 'User';
-const stats = this.getStat(user);
-if(document.getElementById("games")){ document.getElementById("games").textContent = stats.games }
-if(document.getElementById("wins")){ document.getElementById("wins").textContent = stats.wins }
-if(document.getElementById("losses")){ document.getElementById("losses").textContent = stats.losses }
-if(document.getElementById("gun")){ document.getElementById("gun").textContent = stats.guns }
-const favorite = this.findFavorite(stats);
-if(document.getElementById("fav")){ document.getElementById("fav").textContent = favorite }
-const tableBodyEl = document.querySelector('#scores');
-const allscores = this.loadStatMap();
-let i = 1;
-allscores.forEach(function(stats,name) {
-    const positionTdEl = document.createElement('td');
-    const nameTdEl = document.createElement('td');
-    const scoreTdEl = document.createElement('td');
-    positionTdEl.textContent = i;
-    nameTdEl.textContent = name;
-    scoreTdEl.textContent = stats.wins;
+const allscores = loadStatMap();
+const stats = allscores.get(user);
 
-    const rowEl = document.createElement('tr');
-    rowEl.appendChild(positionTdEl);
-    rowEl.appendChild(nameTdEl);
-    rowEl.appendChild(scoreTdEl);
+if(document.querySelector('#scores')){
+    if(document.getElementById("games")){ document.getElementById("games").textContent = stats.games }
+    if(document.getElementById("wins")){ document.getElementById("wins").textContent = stats.wins }
+    if(document.getElementById("losses")){ document.getElementById("losses").textContent = stats.losses }
+    if(document.getElementById("gun")){ document.getElementById("gun").textContent = stats.guns }
+    const favorite = findFavorite(stats);
+    if(document.getElementById("fav")){ document.getElementById("fav").textContent = favorite }
+    const tableBodyEl = document.querySelector('#scores');
 
-    if(tableBodyEl){
-        console.log("found #scores");
-        tableBodyEl.appendChild(rowEl);
-    }
+    let i = 1;
+    allscores.forEach(function(stats,name) {
+        const positionTdEl = document.createElement('td');
+        const nameTdEl = document.createElement('td');
+        const scoreTdEl = document.createElement('td');
+        positionTdEl.textContent = i;
+        nameTdEl.textContent = name;
+        scoreTdEl.textContent = stats.wins;
+
+        const rowEl = document.createElement('tr');
+        rowEl.appendChild(positionTdEl);
+        rowEl.appendChild(nameTdEl);
+        rowEl.appendChild(scoreTdEl);
+
+    tableBodyEl.appendChild(rowEl);
     i++;
-})
+    })
+}
