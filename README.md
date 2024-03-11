@@ -49,8 +49,11 @@ For this deliverable I built the logic and functionality of my website
 - **Game Logic** - The game of Rock Paper Scissors Gun is completely playable
 - Minor Adjustments - The timer was replaced with a points display, and a status message was added
 
-
-
-
-
+## Service Deliverable:
+For this deliverable I made my website a service, and added a 3rd party api
+- **HTTP Service** - Using Node.js and Express the website is now a service
+- **Frontend** - The frontend files are served up using Express static middleware
+- **3rd party service** - My frontend files call a quote generator and displays it on the login screen
+- **Backend Endpoints** - My backend has two endpoints that are called by the frontend
+- Minor Adjustments - I wanted to call a 3rd party service that would check for profane usernames, but I couldn't get it to work correctly, so I switched to the quote generator
 
