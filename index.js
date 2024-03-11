@@ -16,20 +16,25 @@ app.use(`/api`, apiRouter);
 
 // GetScores
 apiRouter.get('/scores', (_req, res) => {
-  res.send(scores);
+    console.log("getting ",scores);
+    res.send(Object.fromEntries(scores));
 });
 
 // SubmitScore
 apiRouter.post('/score', (req, res) => {
-  scores = updateScores(req.body, scores);
-  res.send(scores);
+    console.log("setting",req.body);
+    scores = new Map(Object.entries(req.body));
+    console.log(scores);
+    res.send(Object.fromEntries(scores));
 });
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
+    res.sendFile('index.html', { root: 'public' });
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });
+
+let scores = new Map();
