@@ -1,27 +1,25 @@
 async function loadScores() {
     console.log("Loading Scores");
-    const allscores = loadStatMap();
+    let allscores = loadStatMap();
     try {
         const response = await fetch('/api/scores');
-        serverScores = await response.json();
+        let serverScores = await response.json();
         if(serverScores){
             // console.log("found server stats");
-            allscores = serverScores;
+            allscores = new Map(Object.entries(serverScores));
             localStorage.setItem('localStatMap', JSON.stringify(allscores));
         }
     } catch(err) {
         console.log("couldn't get server stats:",err)
     }
 
-    if(document.querySelector('#scores')){
-        display(allscores);
-    }
+    return allscores;
 }
 
-function updateStats(wins,losses,guns,rock,paper,scissors){
+async function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
-    let stat = getStat(currentUser);
+    let stat = await getStat(currentUser);
     stat.games += wins + losses;
     stat.wins += wins;
     stat.losses += losses;
@@ -29,26 +27,26 @@ function updateStats(wins,losses,guns,rock,paper,scissors){
     stat.rock += rock;
     stat.paper += paper;
     stat.scissors += scissors;
-    setStat(currentUser,stat);
+    await setStat(currentUser,stat);
 }
 
-function getStat(currentUser = "User"){
+async function getStat(currentUser = "User"){
     // console.log("getting stats for", currentUser);
-    const statMap = loadStatMap();
+    const statMap = await loadScores();
     if(statMap.has(currentUser)){
         // console.log(currentUser, "has stats");
         return statMap.get(currentUser);
     } else {
         // console.log(currentUser, "is a new user");
         const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
-        setStat(currentUser,defaultStats);
+        await setStat(currentUser,defaultStats);
         return defaultStats;
     }
 }
 
 async function setStat(currentUser = "User", currentUserStats){
     // console.log("setting stats for", currentUser);
-    const statMap = loadStatMap();
+    const statMap = await loadScores();
     statMap.set(currentUser,currentUserStats);
     const sortedMap = new Map([...statMap.entries()].sort((a, b) => b[1].wins - a[1].wins));
     localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(sortedMap)));
@@ -74,7 +72,7 @@ function loadStatMap(){
     const statsText = localStorage.getItem('localStatMap');
     if(statsText){
         if(statsText.length > 2){
-            // console.log("found map");
+            console.log("found map");
             const statsMap = new Map(Object.entries(JSON.parse(statsText)));
             return statsMap;
         }
@@ -101,10 +99,12 @@ function findFavorite(stats){
     return items.get(Math.max(...items.keys()))
 }
 
-function display(allscores){
+async function display(){
     const user = localStorage.getItem('currentUser') ?? 'User';
     // console.log(allscores);
-    const stats = getStat(user);
+    let allscores = await loadScores();
+    allscores.delete('_id');
+    const stats = await getStat(user);
 
     if(document.getElementById("games")){ document.getElementById("games").textContent = stats.games }
     if(document.getElementById("wins")){ document.getElementById("wins").textContent = stats.wins }
@@ -134,4 +134,7 @@ function display(allscores){
 }
 
 validate();
-loadScores();
+// loadScores();
+if(document.querySelector('#scores')){
+    display();
+}
