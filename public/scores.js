@@ -4,7 +4,7 @@ async function loadScores() {
         const response = await fetch('/api/scores');
         serverScores = await response.json();
         if(serverScores.size > 0){
-            console.log("found server stats");
+            // console.log("found server stats");
             allscores = serverScores;
             localStorage.setItem('localStatMap', JSON.stringify(allscores));
         }
@@ -52,7 +52,7 @@ async function setStat(currentUser = "User", currentUserStats){
     const sortedMap = new Map([...statMap.entries()].sort((a, b) => b[1].wins - a[1].wins));
     localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(sortedMap)));
     try {
-        console.log("trying to set stat:",sortedMap);
+        // console.log("trying to set stat:",sortedMap);
         const response = await fetch('/api/score', {
             method: 'POST',
             headers: {'content-type': 'application/json'},

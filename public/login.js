@@ -1,5 +1,5 @@
 function login() {
-  console.log("Logging in");
+  // console.log("Logging in");
   const nameEl = document.querySelector("#name");
   const passwordEl = document.querySelector("#password");
   if(nameEl.value === "" || passwordEl.value === ""){
@@ -85,9 +85,7 @@ function displayQuote(data) {
 
 async function validate(){
   const response = await fetch('/api/scores');
-  console.log(response.status);
   if (response.status !== 200) {
-      console.log("not validated");
       window.location.href = 'index.html';
   }
 }
