@@ -57,3 +57,10 @@ For this deliverable I made my website a service, and added a 3rd party api
 - **Backend Endpoints** - My backend has two endpoints that are called by the frontend
 - Minor Adjustments - I wanted to call a 3rd party service that would check for profane usernames, but I couldn't get it to work correctly, so I switched to the quote generator
 
+## Login Deliverable:
+For this deliverable I added user creation and authentication, and global score storage.
+- **New User registration** - Takes a new username and password and stores them in the database.
+- **User authentication** - Validates the input username and password and logs in the user.
+- **MongoDB application storage** - All user scores and stats are stored in MongoDB
+- **MongoDB credential storage** - User credentials are stored in MongoDB
+- **Authentication based functionality** - All unauthorized access to game and score pages are automatically re-routed to the login page
