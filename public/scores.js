@@ -132,4 +132,5 @@ function display(allscores){
     })
 }
 
+validate();
 loadScores();

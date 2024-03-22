@@ -151,4 +151,5 @@ class Game {
     }
 }
 
+validate();
 const game = new Game();

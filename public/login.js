@@ -13,12 +13,9 @@ function login() {
 async function loginOrCreate(username) {
   let endpoint = "";
   const theuser = await getUser(username);
-  console.log("the user found is: " + theuser);
   if(theuser === null){
-    console.log("New user");
     endpoint = `/api/auth/create`;
   } else {
-    console.log("Existing user");
     endpoint = `/api/auth/login`;
   }
 
@@ -84,4 +81,13 @@ function displayQuote(data) {
       containerEl.appendChild(quoteEl);
       containerEl.appendChild(authorEl);
     });
+}
+
+async function validate(){
+  const response = await fetch('/api/scores');
+  console.log(response.status);
+  if (response.status !== 200) {
+      console.log("not validated");
+      window.location.href = 'index.html';
+  }
 }
