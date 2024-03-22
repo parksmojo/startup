@@ -86,16 +86,19 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 // GetScores
-apiRouter.get('/scores', (_req, res) => {
-    console.log("getting ",scores);
-    res.send(Object.fromEntries(scores));
+secureApiRouter.get('/scores', async (_req, res) => {
+    // console.log("getting ",scores);
+    const dbscoresobj = await DB.getHighScores();
+    console.log("found in database: ",dbscoresobj);
+    const scoresmap = dbscoresobj.at(0);
+    res.send(scoresmap);
 });
 
 // SubmitScore
-apiRouter.post('/score', (req, res) => {
+apiRouter.post('/score', async (req, res) => {
     console.log("setting",req.body);
     scores = new Map(Object.entries(req.body));
-    console.log(scores);
+    await DB.addScore(Object.fromEntries(scores));
     res.send(Object.fromEntries(scores));
 });
 

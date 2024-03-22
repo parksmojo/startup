@@ -41,16 +41,12 @@ async function createUser(email, password) {
 }
 
 function addScore(score) {
+  scoreCollection.deleteMany();
   scoreCollection.insertOne(score);
 }
 
 function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
+  const cursor = scoreCollection.find();
   return cursor.toArray();
 }
 
