@@ -5,7 +5,7 @@ Click [here](/notes.md) to see my notes
 Have you ever played Rock Paper Scissors? Have you ever wished it was even cooler? Now you can play the classic game with an added twist, a gun! The gun is beaten by the rock, but beats both paper and scissors. Play against a cpu or even your friends, and see how you stack up against others!
 
 ### Design
-| ![The Menu](images/menu_sketch.png) | ![The Game](images/game_sketch.png) | ![Your Account](images/account_sketch.png) | ![The Scoreboard](images/scores_sketch.png) |
+| ![The Menu](public/images/menu_sketch.png) | ![The Game](public/images/game_sketch.png) | ![Your Account](public/images/account_sketch.png) | ![The Scoreboard](public/images/scores_sketch.png) |
 | - | - | - | - | 
 
 ### Key Features
