@@ -1,13 +1,8 @@
 async function loadScores() {
-    const allscores = loadStatMap();
+    let allscores = [];
     try {
         const response = await fetch('/api/scores');
-        serverScores = await response.json();
-        if(serverScores.size > 0){
-            // console.log("found server stats");
-            allscores = serverScores;
-            localStorage.setItem('localStatMap', JSON.stringify(allscores));
-        }
+        allscores = await response.json();
     } catch(err) {
         console.log("couldn't get server stats:",err)
     }
@@ -15,12 +10,15 @@ async function loadScores() {
     if(document.querySelector('#scores')){
         display(allscores);
     }
+
+    console.log("Received from server: ",allscores);
+    return allscores;
 }
 
-function updateStats(wins,losses,guns,rock,paper,scissors){
+async function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
-    let stat = getStat(currentUser);
+    let stat = await getStat(currentUser);
     stat.games += wins + losses;
     stat.wins += wins;
     stat.losses += losses;
@@ -28,40 +26,36 @@ function updateStats(wins,losses,guns,rock,paper,scissors){
     stat.rock += rock;
     stat.paper += paper;
     stat.scissors += scissors;
-    setStat(currentUser,stat);
+    setStat(stat);
 }
 
-function getStat(currentUser = "User"){
-    // console.log("getting stats for", currentUser);
-    const statMap = loadStatMap();
-    if(statMap.has(currentUser)){
-        // console.log(currentUser, "has stats");
-        return statMap.get(currentUser);
+async function getStat(currentUser = "User"){
+    console.log("getting stats for", currentUser);
+    const stats = await loadScores();
+    let userStats = null;
+    for(let item of stats){
+        if(item.name === currentUser){
+            userStats = item;
+        }
+    }
+    if(userStats === null){
+        console.log(currentUser, "is a new user");
+        const newStats = { name: currentUser, games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
+        setStat(newStats);
+        return newStats;
     } else {
-        // console.log(currentUser, "is a new user");
-        const defaultStats = { games: 0, wins: 0, losses: 0, guns: 0, rock: 0, paper: 0, scissors: 0 };
-        setStat(currentUser,defaultStats);
-        return defaultStats;
+        console.log(currentUser, "has stats");
+        return userStats;
     }
 }
 
-async function setStat(currentUser = "User", currentUserStats){
-    // console.log("setting stats for", currentUser);
-    const statMap = loadStatMap();
-    statMap.set(currentUser,currentUserStats);
-    const sortedMap = new Map([...statMap.entries()].sort((a, b) => b[1].wins - a[1].wins));
-    localStorage.setItem('localStatMap',JSON.stringify(Object.fromEntries(sortedMap)));
+async function setStat(stats){
     try {
-        // console.log("trying to set stat:",sortedMap);
         const response = await fetch('/api/score', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify(Object.fromEntries(sortedMap)),
+            body: JSON.stringify(stats),
         });
-
-        const resMap = await response.json();
-        console.log(resMap);
-        // localStorage.setItem('localStatMap', JSON.stringify(Object.fromEntries(sortedMap)));
     } catch(err){
         console.log("couldn't submit stats to server:",err)
     }
@@ -133,4 +127,4 @@ function display(allscores){
 }
 
 validate();
-loadScores();
+// loadScores();

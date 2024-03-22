@@ -84,8 +84,8 @@ function displayQuote(data) {
 }
 
 async function validate(){
-  const response = await fetch('/api/scores');
-  if (response.status !== 200) {
-      window.location.href = 'index.html';
-  }
+  // const response = await fetch('/api/scores');
+  // if (response.status !== 200) {
+  //     window.location.href = 'index.html';
+  // }
 }

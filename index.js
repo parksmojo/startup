@@ -87,19 +87,18 @@ secureApiRouter.use(async (req, res, next) => {
 
 // GetScores
 secureApiRouter.get('/scores', async (_req, res) => {
-    // console.log("getting ",scores);
-    const dbscoresobj = await DB.getHighScores();
-    // console.log("found in database: ",dbscoresobj);
-    const scoresmap = dbscoresobj.at(0);
-    res.send(scoresmap);
+    const scores = await DB.getHighScores();
+    // console.log("sending scores: ",scores);
+    res.send(scores);
 });
 
 // SubmitScore
 secureApiRouter.post('/score', async (req, res) => {
     // console.log("setting",req.body);
-    scores = new Map(Object.entries(req.body));
-    await DB.addScore(Object.fromEntries(scores));
-    res.send(Object.fromEntries(scores));
+    score = req.body;
+    await DB.addScore(score);
+    const scores = await DB.getHighScores();
+    res.send(scores);
 });
 
 // Default error handler
@@ -125,4 +124,4 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-let scores = new Map();
+// let scores = new Map();

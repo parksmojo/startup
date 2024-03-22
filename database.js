@@ -40,14 +40,18 @@ async function createUser(email, password) {
   return user;
 }
 
-function addScore(score) {
-  scoreCollection.deleteMany();
+async function addScore(score) {
+  console.log("DB adding score: ",score);
+  const query = { name: score.name }
+  scoreCollection.deleteOne(query);
   scoreCollection.insertOne(score);
 }
 
-function getHighScores() {
+async function getHighScores() {
   const cursor = scoreCollection.find();
-  return cursor.toArray();
+  const arr = await cursor.toArray();
+  console.log("stat array: ",arr)
+  return arr;
 }
 
 module.exports = {
