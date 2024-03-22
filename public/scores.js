@@ -1,9 +1,10 @@
 async function loadScores() {
+    console.log("Loading Scores");
     const allscores = loadStatMap();
     try {
         const response = await fetch('/api/scores');
         serverScores = await response.json();
-        if(serverScores.size > 0){
+        if(serverScores){
             // console.log("found server stats");
             allscores = serverScores;
             localStorage.setItem('localStatMap', JSON.stringify(allscores));

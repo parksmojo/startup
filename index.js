@@ -96,8 +96,8 @@ secureApiRouter.get('/scores', async (_req, res) => {
 
 // SubmitScore
 secureApiRouter.post('/score', async (req, res) => {
-    // console.log("setting",req.body);
-    scores = new Map(Object.entries(req.body));
+    console.log("setting",req.body);
+    let scores = new Map(Object.entries(req.body));
     await DB.addScore(Object.fromEntries(scores));
     res.send(Object.fromEntries(scores));
 });

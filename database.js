@@ -40,9 +40,9 @@ async function createUser(email, password) {
   return user;
 }
 
-function addScore(score) {
-  scoreCollection.deleteMany();
-  scoreCollection.insertOne(score);
+async function addScore(score) {
+  await scoreCollection.deleteMany();
+  await scoreCollection.insertOne(score);
 }
 
 function getHighScores() {
