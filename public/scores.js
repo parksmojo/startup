@@ -134,7 +134,6 @@ async function display(){
 }
 
 validate();
-// loadScores();
 if(document.querySelector('#scores')){
     display();
 }

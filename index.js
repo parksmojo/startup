@@ -89,8 +89,6 @@ secureApiRouter.use(async (req, res, next) => {
 // GetScores
 secureApiRouter.get('/scores', async (_req, res) => {
     const dbscoresobj = await DB.getHighScores();
-    console.log("getting ",scores);
-    // console.log("found in database: ",dbscoresobj);
     const scoresmap = dbscoresobj.at(0);
     res.send(scoresmap);
 });
@@ -127,4 +125,3 @@ const httpService = app.listen(port, () => {
 });
 
 peerProxy(httpService);
-let scores = new Map();
