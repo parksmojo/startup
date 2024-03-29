@@ -47,6 +47,7 @@ header {
     display: flex;
     position: fixed;
     width: 100%;
+    align-items: center;
 }
 
 header div {
@@ -122,8 +123,11 @@ footer a {
     float: right;
 }
 
+.small-title {
+    display: none;
+}
+
 @media (max-width: 815px) {
-    header h1 {
-      display: none;
-    }
-  }
+    .small-title { display: inline-block; }
+    .full-title { display: none; }
+}
