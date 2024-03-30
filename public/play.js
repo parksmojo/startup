@@ -1,3 +1,7 @@
+const JoinServerEvent = 'joinServer';
+const LeaveServerEvent = 'leaveServer';
+const WonGame = 'wonGame';
+
 class Game {
     currentUser;
     userScore;
@@ -19,6 +23,7 @@ class Game {
 
         this.resetStatCounters();
         this.cpu();
+        this.configureWebSocket();
     }
 
     resetStatCounters(){
@@ -34,6 +39,7 @@ class Game {
         if(winner === 'user'){
             this.wins += 1;
             document.getElementById('status').innerText = this.currentUser + " won!";
+            this.broadcastEvent(this.currentUser, WonGame, {});
         } else if(winner === 'cpu'){
             this.losses += 1;
             document.getElementById('status').innerText = "CPU won!";
@@ -148,6 +154,44 @@ class Game {
     cpu(){
         const cpuPick = Math.floor(Math.random() * 4);
         localStorage.setItem('cpuPick',cpuPick);
+    }
+
+    configureWebSocket() {
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        this.socket.onopen = (event) => {
+            this.displayMsg('system', 'game', 'connected');
+            this.broadcastEvent(this.currentUser, JoinServerEvent, {});
+        };
+        this.socket.onclose = (event) => {
+            this.displayMsg('system', 'game', 'disconnected');
+            this.broadcastEvent(this.currentUser, LeaveServerEvent, {});
+        };
+        this.socket.onmessage = async (event) => {
+            const msg = JSON.parse(await event.data.text());
+            if (msg.type === JoinServerEvent) {
+              this.displayMsg('player', msg.from, 'Started playing');
+            } else if (msg.type === LeaveServerEvent) {
+              this.displayMsg('player', msg.from, 'Went Idle');
+            } else if (msg.type === WonGame) {
+                this.displayMsg('player', msg.from, 'Won a game!');
+              }
+        };
+    }
+    
+    displayMsg(cls, from, msg) {
+        const chatText = document.querySelector('#player-messages');
+        chatText.innerHTML =
+            `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+    }
+    
+    broadcastEvent(from, type, value) {
+        const event = {
+            from: from,
+            type: type,
+            value: value,
+        };
+        this.socket.send(JSON.stringify(event));
     }
 }
 
