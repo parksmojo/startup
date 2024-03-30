@@ -64,3 +64,10 @@ For this deliverable I added user creation and authentication, and global score 
 - **MongoDB application storage** - All user scores and stats are stored in MongoDB
 - **MongoDB credential storage** - User credentials are stored in MongoDB
 - **Authentication based functionality** - All unauthorized access to game and score pages are automatically re-routed to the login page
+
+## WebSocket Deliverable:
+For this deliverable I added a live global feed to the game page.
+- **Backend WebSocket** - Backend listens for WebSocket connection
+- **Frontend WebSocket** - Frontend makes WebSocket connection
+- **WebSocket Data** - Game sends messages over WebSocket to backend
+- **Data Display** - Messages are displayed under the game interface
