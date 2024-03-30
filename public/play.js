@@ -181,6 +181,10 @@ class Game {
     
     displayMsg(cls, from, msg) {
         const chatText = document.querySelector('#player-messages');
+        if(chatText.childElementCount > 12){
+            console.log("removing an element");
+            chatText.removeChild(chatText.lastChild);
+        }
         chatText.innerHTML =
             `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
     }
