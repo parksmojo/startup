@@ -2,16 +2,21 @@
   "name": "startup",
   "version": "1.0.0",
   "description": "Click [here](/notes.md) to see my notes\r ## Description Deliverable:\r ### Elevator Pitch\r Have you ever played Rock Paper Scissors? Have you ever wished it was even cooler? Now you can play the classic game with an added twist, a gun! The gun is beaten by the rock, but beats both paper and scissors. Play against a cpu or even your friends, and see how you stack up against others!",
-  "main": "login.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "vite": "^5.2.8"
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.1",
+    "install": "^0.13.0",
+    "mongodb": "^6.5.0",
+    "npm": "^10.5.0",
+    "uuid": "^9.0.1",
+    "ws": "^8.16.0"
   }
 }
