@@ -1,30 +1,48 @@
 import React from 'react';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Play } from './play/play';
+import { Scores } from './scores/scores';
+import { Home } from './home/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
     return (
-        <div className='body'>
-            <header class="dark">
-                <h1 class="full-title">Rock, Paper, Scissors ... Gun</h1>
-                <h1 class="small-title">RPSG</h1>
-                <nav>
-                    <menu>
-                        <li><a class="active" href="home.html">Home</a></li>
-                        <li><a href="play.html">Play</a></li>
-                        <li><a href="scores.html">Scoreboard</a></li>
-                    </menu>
-                </nav>
-                <div>Logged in as: <a id="user" onclick="logout()" href="index.html">User</a></div>
-                <script>insertUsername()</script>
-            </header>
+        <BrowserRouter>
+            <div className='body'>
+                <header className="dark">
+                    <h1 className="full-title">Rock, Paper, Scissors ... Gun</h1>
+                    <h1 className="small-title">RPSG</h1>
+                    <nav>
+                        <menu>
+                            <li><NavLink className='nav-link active' to='home'>Home</NavLink></li>
+                            <li><NavLink className='nav-link' to='play'>Play</NavLink></li>
+                            <li><NavLink className='nav-link' to='scores'>Scoreboard</NavLink></li>
+                        </menu>
+                    </nav>
+                    <div>Logged in as: <NavLink className='nav-link' id="user" to='login'>User</NavLink></div>
+                    <script>insertUsername()</script>
+                </header>
 
-            <main>App components go here</main>
+                <Routes>
+                    <Route path='/' element={<Login />} exact />
+                    <Route path='/play' element={<Play />} />
+                    <Route path='/scores' element={<Scores />} />
+                    <Route path='/home' element={<Home />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
 
-            <footer class="dark">
-                <span>Parker Shumard</span>
-                <a href="https://github.com/parksmojo/startup">Github</a>
-            </footer>
-        </div>
+                <footer className="dark">
+                    <span>Parker Shumard</span>
+                    <a href="https://github.com/parksmojo/startup">Github</a>
+                </footer>
+            </div>
+        </BrowserRouter>
     );
 }
+
+function NotFound() {
+    return <main className='light'>404: Return to sender. Address unknown.</main>;
+  }
