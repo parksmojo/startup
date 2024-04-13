@@ -5,7 +5,7 @@ import game_description from '/game_description.png';
 export function Home() {
   return (
     <main className='light'>
-      <div class="popup centered">
+      <div className="popup centered">
         <h1>Welcome</h1>
         <p>
             Have you ever played Rock Paper Scissors? Have you ever wished it was even cooler? 

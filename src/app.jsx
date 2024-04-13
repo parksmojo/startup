@@ -1,13 +1,21 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { Login } from './login/login';
-import { Play } from './play/play';
-import { Scores } from './scores/scores';
-import { Home } from './home/home';
+import { Login } from './login/login.jsx';
+import { Play } from './play/play.jsx';
+import { Scores } from './scores/scores.jsx';
+import { Home } from './home/home.jsx';
+import { insertUsername } from './login/loginFuncs';
+import { logout } from './login/loginFuncs'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
+
+    function clicking(){
+        logout();
+        insertUsername();
+    }
+
     return (
         <BrowserRouter>
             <div className='body'>
@@ -21,8 +29,7 @@ export default function App() {
                             <li><NavLink className='nav-link' to='scores'>Scoreboard</NavLink></li>
                         </menu>
                     </nav>
-                    <div>Logged in as: <NavLink className='nav-link' id="user" to='login'>User</NavLink></div>
-                    <script>insertUsername()</script>
+                    <div>Logged in as: <NavLink className='nav-link' id="user" to='login' onClick={() => clicking()}>{insertUsername()}</NavLink></div>
                 </header>
 
                 <Routes>
