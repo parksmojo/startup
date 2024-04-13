@@ -16,7 +16,7 @@ export default function App() {
                     <h1 className="small-title">RPSG</h1>
                     <nav>
                         <menu>
-                            <li><NavLink className='nav-link active' to='home'>Home</NavLink></li>
+                            <li><NavLink className='nav-link' to='home'>Home</NavLink></li>
                             <li><NavLink className='nav-link' to='play'>Play</NavLink></li>
                             <li><NavLink className='nav-link' to='scores'>Scoreboard</NavLink></li>
                         </menu>
