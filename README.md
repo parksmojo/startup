@@ -78,4 +78,4 @@ For this deliverable converted the website to run on react.
 - **React components** - Each page is represented using functional react components
 - **React router** - A react router manages which component is shown
 - **React hooks** - A react hook is used to fetch and display the scores on the scoreboard when the component is rendered.
-- Minor Adjustments - In react I didn't get a chance to get a few pictures working in the game page, nor controlled authenticated access. Logging in, the game, websocket, and score updating all still function as expected. 
+- Minor Adjustments - Logging in, gameplay, websocket, and score updating all still function as expected. However, in react I didn't get a chance to get a few pictures working in the game page, nor controlled authenticated access. 
