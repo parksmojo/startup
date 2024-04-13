@@ -1,4 +1,4 @@
-function login() {
+export function loginFunc() {
   // console.log("Logging in");
   const nameEl = document.querySelector("#name");
   const passwordEl = document.querySelector("#password");
@@ -31,7 +31,6 @@ async function loginOrCreate(username) {
 
   if (response.ok) {
     localStorage.setItem("currentUser", userName);
-    window.location.href = 'home.html';
   } else {
     const body = await response.json();
     document.getElementById("desc").innerHTML = "Invalid Login";
