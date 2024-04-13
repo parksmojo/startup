@@ -1,12 +1,13 @@
 import React from 'react';
+import { display } from "./scores.js";
 
 export function Scores() {
   return (
     <main className='light'>
-      <div class="long popup">
-                <div class="first">
-                    <h1 class="centered">Your stats:</h1>
-                    <table class="table">
+      <div className="long popup">
+                <div className="first">
+                    <h1 className="centered">Your stats:</h1>
+                    <table className="table">
                         <tbody>
                             <tr>
                                 <td>Games Played:</td>
@@ -32,8 +33,8 @@ export function Scores() {
                     </table>
                 </div>
                 <div>
-                    <h1 class="centered">Global Scoreboard:</h1>
-                    <table class="table">
+                    <h1 className="centered">Global Scoreboard:</h1>
+                    <table className="table">
                         <thead>
                             <th>#</th>
                             <th>Name</th>
@@ -44,6 +45,14 @@ export function Scores() {
                     </table>
                 </div>
             </div>
+            <DisplayScores  />
     </main>
   );
+}
+
+function DisplayScores() {
+  React.useEffect(() => {
+    display();
+    console.log('rendered');
+  });
 }

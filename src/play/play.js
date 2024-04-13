@@ -199,5 +199,5 @@ class Game {
     }
 }
 
-validate();
+// validate();
 const game = new Game();
