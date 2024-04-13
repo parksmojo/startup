@@ -1,6 +1,7 @@
 const JoinServerEvent = 'joinServer';
 const LeaveServerEvent = 'leaveServer';
 const WonGame = 'wonGame';
+import { updateStats } from '../scores/scores';
 
 class Game {
     currentUser;
@@ -181,12 +182,14 @@ class Game {
     
     displayMsg(cls, from, msg) {
         const chatText = document.querySelector('#player-messages');
-        if(chatText.childElementCount > 12){
-            console.log("removing an element");
-            chatText.removeChild(chatText.lastChild);
+        if(chatText){
+            if(chatText.childElementCount > 12){
+                console.log("removing an element");
+                chatText.removeChild(chatText.lastChild);
+            }
+            chatText.innerHTML =
+                `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
         }
-        chatText.innerHTML =
-            `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
     }
     
     broadcastEvent(from, type, value) {
@@ -200,4 +203,4 @@ class Game {
 }
 
 // validate();
-const game = new Game();
+export const game = new Game();

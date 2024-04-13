@@ -36,9 +36,12 @@ export function Scores() {
                     <h1 className="centered">Global Scoreboard:</h1>
                     <table className="table">
                         <thead>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Wins</th>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Wins</th>
+                            </tr>
+                            
                         </thead>
                         <tbody id="scores">
                         </tbody>

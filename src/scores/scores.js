@@ -16,7 +16,7 @@ async function loadScores() {
     return allscores;
 }
 
-async function updateStats(wins,losses,guns,rock,paper,scissors){
+export async function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
     let stat = await getStat(currentUser);
