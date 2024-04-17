@@ -1,4 +1,4 @@
-function login() {
+export async function loginFunc() {
   // console.log("Logging in");
   const nameEl = document.querySelector("#name");
   const passwordEl = document.querySelector("#password");
@@ -6,7 +6,7 @@ function login() {
     document.getElementById("desc").innerHTML = "Invalid username or password";
     document.getElementById("desc").style.color = "red";
   } else {
-    loginOrCreate(nameEl.value);
+    return await loginOrCreate(nameEl.value);
   }
 }
 
@@ -19,6 +19,7 @@ async function loginOrCreate(username) {
     endpoint = `/api/auth/login`;
   }
 
+  console.log("this far");
   const userName = document.querySelector('#name')?.value;
   const password = document.querySelector('#password')?.value;
   const response = await fetch(endpoint, {
@@ -31,15 +32,17 @@ async function loginOrCreate(username) {
 
   if (response.ok) {
     localStorage.setItem("currentUser", userName);
-    window.location.href = 'home.html';
+    return true;
   } else {
     const body = await response.json();
+    console.log("returning false: " + body);
     document.getElementById("desc").innerHTML = "Invalid Login";
     document.getElementById("desc").style.color = "red";
+    return false;
   }
 }
   
-function logout() {
+export function logout() {
   localStorage.setItem("currentUser","User");
   fetch(`/api/auth/logout`, {
     method: 'delete',
@@ -57,11 +60,13 @@ async function getUser(email) {
   return null;
 }
 
-function insertUsername(){
+export function insertUsername(){
   const userEl = document.getElementById("user");
   if(userEl !== null){
     userEl.textContent = localStorage.getItem('currentUser');
+    
   }
+  return localStorage.getItem('currentUser');
 }
 
 function displayQuote(data) {

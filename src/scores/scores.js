@@ -16,7 +16,7 @@ async function loadScores() {
     return allscores;
 }
 
-async function updateStats(wins,losses,guns,rock,paper,scissors){
+export async function updateStats(wins,losses,guns,rock,paper,scissors){
     // console.log("updating stats!",wins,losses,guns,rock,paper,scissors);
     const currentUser = localStorage.getItem('currentUser') ?? 'User';
     let stat = await getStat(currentUser);
@@ -99,7 +99,7 @@ function findFavorite(stats){
     return items.get(Math.max(...items.keys()))
 }
 
-async function display(){
+export async function display(){
     const user = localStorage.getItem('currentUser') ?? 'User';
     // console.log(allscores);
     let allscores = await loadScores();
@@ -133,7 +133,7 @@ async function display(){
     })
 }
 
-validate();
+// validate();
 if(document.querySelector('#scores')){
     display();
 }

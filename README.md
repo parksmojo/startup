@@ -71,3 +71,11 @@ For this deliverable I added a live global feed to the game page.
 - **Frontend WebSocket** - Frontend makes WebSocket connection
 - **WebSocket Data** - Game sends messages over WebSocket to backend
 - **Data Display** - Messages are displayed under the game interface
+
+## React Deliverable:
+For this deliverable converted the website to run on react.
+- **Vite** - Files are bundled using vite
+- **React components** - Each page is represented using functional react components
+- **React router** - A react router manages which component is shown
+- **React hooks** - A react hook is used to fetch and display the scores on the scoreboard when the component is rendered.
+- Minor Adjustments - Logging in, gameplay, websocket, and score updating all still function as expected. However, in react I didn't get a chance to get a few pictures working in the game page, nor controlled authenticated access. 
